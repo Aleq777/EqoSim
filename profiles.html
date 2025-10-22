@@ -57,9 +57,25 @@
     <script id="views" type="application/xml">
 
     <Views>
-        <View>
 
+        <View Name="Profiles" Title="Profile">
+            <Data>Data.Profiles</Data>
+            <Column Type="Counter">
+                <Title>Lp.</Title>
+            </Column>
+            <Column Type="Custom">
+                <Title>Nazwa</Title>
+                <Each Using="$=Name,@=Color">
+                    <div style="background-color:@;">$</div>
+                </Each>
+            </Column>
+            <Column Type="Action">
+                <Title>Akcje</Title>
+                <Button Action="EditProfile">Edytuj</Button>
+                <Button Action="RemoveProfile">Usuń</Button>
+            </Column>
         </View>
+
     </Views>
 
     </script>
@@ -67,8 +83,19 @@
     <script id="forms" type="application/xml">
     <Forms>
 
-        <Form>
-
+        <Form Name="ProfilesCreator" Title="Konfigurator profili" ConnectedView="Profiles">
+            <Data>Data.Profiles</Data>
+            <Actions>
+                <Button Type="Submit"/>
+                <Button Type="Confirm"/>
+                <Button Type="Cancel"/>
+            </Actions>
+            <Question Key="Name" Required="true">
+                <Title>Nazwa</Title>
+            </Question>
+            <Question Key="Color" Type="Color" Default="#ffffff">
+                <Title>Kolor</Title>
+            </Question>
         </Form>
 
     </Forms>
@@ -104,7 +131,8 @@
         </ul>
     </nav>
     <main>
-        
+        <div id="ProfilesCreator"></div>
+        <div id="Profiles"></div>
     </main>
     <footer>
         <p>
