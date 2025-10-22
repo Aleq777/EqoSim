@@ -1,0 +1,23 @@
+<Form Name="creator" Title="Konfiguracja postaci" ConnectedView="users">
+    <Description>
+        Skonfiguruj postać
+    </Description>
+    <Data>data.users</Data>
+    <Question Key="identifier" Type="Text" Required="true">
+        <Title>Identifier</Title>
+    </Question>
+    <Question Key="firstname" Type="Text" Required="true">
+        <Title>Imię</Title>
+    </Question>
+    <Question Key="lastname" Type="Text" Required="true">
+        <Title>Nazwisko</Title>
+    </Question>
+    <Question Key="inventory" Type="MultiObject">
+        <Title>Ekwipunek</Title>
+    </Question>
+    <Actions>
+        <Button Type="Clear"/>
+        <Button Action="log">Sprawdź</Button>
+        <Button Type="Submit" Editing="Edytuj">Dodaj</Button>
+    </Actions>
+</Form>

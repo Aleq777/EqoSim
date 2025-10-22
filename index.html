@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script type="text/javascript" src="./data.js"></script>
+
+    <script type="text/javascript" src="./Scripts/base.js"></script>
+
+    <script type="text/javascript" src="./Scripts/Classes/DataManipulator.js"></script>
+    <script type="text/javascript" src="./Scripts/Classes/Manager.js"></script>
+    <script type="text/javascript" src="./Scripts/Classes/Action.js"></script>
+
+    <!-- VIEWS -->
+
+    <script type="text/javascript" src="./Scripts/View/Columns/Column.js"></script>
+    <script type="text/javascript" src="./Scripts/View/Columns/ColumnAction.js"></script>
+    <script type="text/javascript" src="./Scripts/View/Columns/ColumnActive.js"></script>
+    <script type="text/javascript" src="./Scripts/View/Columns/ColumnCounter.js"></script>
+    <script type="text/javascript" src="./Scripts/View/Columns/ColumnCustom.js"></script>
+    <script type="text/javascript" src="./Scripts/View/Columns/ColumnField.js"></script>
+    <script type="text/javascript" src="./Scripts/View/Columns/Group.js"></script>
+
+    <script type="text/javascript" src="./Scripts/View/Table.js"></script>
+    <script type="text/javascript" src="./Scripts/View/View.js"></script>
+    <script type="text/javascript" src="./Scripts/View/ViewManager.js"></script>
+
+    
+    <!-- FORMS -->
+
+    <script type="text/javascript" src="./Scripts/Form/Questions/Answer.js"></script>
+    <script type="text/javascript" src="./Scripts/Form/Questions/Question.js"></script>
+    <script type="text/javascript" src="./Scripts/Form/Questions/ComplexQuestion.js"></script>
+
+    <script type="text/javascript" src="./Scripts/Form/Questions/QuestionText.js"></script>
+    <script type="text/javascript" src="./Scripts/Form/Questions/QuestionParagraph.js"></script>
+    <script type="text/javascript" src="./Scripts/Form/Questions/QuestionCheckbox.js"></script>
+    <script type="text/javascript" src="./Scripts/Form/Questions/QuestionColor.js"></script>
+    <script type="text/javascript" src="./Scripts/Form/Questions/QuestionDate.js"></script>
+    <script type="text/javascript" src="./Scripts/Form/Questions/QuestionFile.js"></script>
+    <script type="text/javascript" src="./Scripts/Form/Questions/QuestionMultiSelect.js"></script>
+    <script type="text/javascript" src="./Scripts/Form/Questions/QuestionNumber.js"></script>
+    <script type="text/javascript" src="./Scripts/Form/Questions/QuestionRadio.js"></script>
+    <script type="text/javascript" src="./Scripts/Form/Questions/QuestionRange.js"></script>
+    <script type="text/javascript" src="./Scripts/Form/Questions/QuestionSelect.js"></script>
+    <script type="text/javascript" src="./Scripts/Form/Questions/QuestionObject.js"></script>
+    <script type="text/javascript" src="./Scripts/Form/Questions/QuestionMultiObject.js"></script>
+    
+
+    <script type="text/javascript" src="./Scripts/Form/Form.js"></script>
+    <script type="text/javascript" src="./Scripts/Form/FormManager.js"></script>
+    
+    <script type="text/javascript" src="./Scripts/main.js"></script>
+    <script type="text/javascript" src="./functions.js"></script>
+
+    <script id="views" type="application/xml">
+
+    <Views>
+        <View Name="Profiles" Title="Lista profili">
+            <Data>Profiles</Data>
+            <Column Type="Counter">
+                <Title>Lp.</Title>
+            </Column>
+            <Column Type="Custom">
+                <Title>Nazwa</Title>
+                <Each Using="$=Name,@=Color">
+                    <div style="background-color:@;">$</div>
+                </Each>
+            </Column>
+            <Column Type="Action">
+                <Title>Akcje</Title>
+                <Button Action="(function (index) {formManager.GetByName('ProfilesCreator').Edit(index);})">Edytuj</Button>
+                <Button Action="(function (index) {viewManager.GetByName('Profiles').Remove(index)})">Usuń</Button>
+                <!-- <Button Action="">Edytuj</Button>
+                <Button Action="">Usuń</Button> -->
+            </Column>
+        </View>
+
+        <View Name="Items" Title="Przedmioty">
+            <Data>Items</Data>
+            <Column Key="Name">
+
+            </Column>
+            <Column Key="Cost">
+
+            </Column>
+            <Column Key="IncomeFrequency">
+
+            </Column>
+            <Column Key="IncomeValue">
+
+            </Column>
+        </View>
+
+        <View Name="users" Title="Użytkownicy" DataType="Column">
+            <Description>
+                Przykładowa tabela z użytkownikami.
+            </Description>
+            <Data>data.users</Data>
+            <Group Title="Grupa">
+                <Column Type="Counter" StartFrom="1">
+                    <Title>lp.</Title>
+                </Column>
+                <Column Type="Active">
+                    <Title>X</Title>
+                </Column>
+            </Group>
+            <Column Key="identifier">
+                
+            </Column>
+            <Column Type="Custom">
+                <Title>Imię i nazwisko</Title>
+                <!-- HardSpaces = false (domyślnie) powoduje ignorowanie spacji jeśli są -->
+                <Each Using="$ = firstname, @ = lastname" HardSpaces="false">
+                    $ @
+                </Each>
+            </Column>
+            <Column Type="Custom">
+                <Title>Ekwipunek</Title>
+                <Each Using="$=inventory">
+                    <Table>
+                        <Data>$</Data>
+                        <Column Type="Field" Key="label">
+                            <Title>Przedmiot</Title>
+                        </Column>
+                        <Column Type="Field" Key="count">
+                            <Title>Ilość</Title>
+                        </Column>
+                    </Table>
+                </Each>
+            </Column>
+            <Column Type="Action">
+                <Title>Akcje</Title>
+                <!-- <Button Action="EditViewRecordInForm">Edytuj</Button>
+                <Button Action="console.log">Usuń</Button> -->
+                <Button Action="">Edytuj</Button>
+                <Button Action="">Usuń</Button>
+            </Column>
+        </View>
+    </Views>
+
+    </script>
+
+    <script id="forms" type="application/xml">
+    <Forms>
+
+        <Form Name="ProfilesCreator" Title="Konfiguracja profili" ConnectedView="Profiles">
+            <Data>Profiles</Data>
+            <Question Key="Name">
+                <Title>Nazwa</Title>
+            </Question>
+            <Question Key="Color" Type="Color" Default="#ffffff">
+                <Title>Kolor</Title>
+            </Question>
+            <Actions>
+                <Button Type="Submit"/>
+                <Button Type="Confirm"/>
+                <Button Type="Cancel"/>
+            </Actions>
+        </Form>
+
+        <Form Name="ItemsCreator" Title="Konfigurator przedmiotów">
+            <Data>Items</Data>
+            <Actions>
+                <Button Type="Submit"></Button>
+                <Button Type="Cancel"/>
+                <Button Type="Confirm"/>
+            </Actions>
+            <Question Key="Name">
+                <Title>Nazwa</Title>
+            </Question>
+            <Question Key="Cost" Type="Number" Step="1">
+                <Title>Koszt</Title>
+            </Question>
+            <Question Key="IncomeFrequency" Type="Number" Step="1" Min="1">
+                <Title>Częstotliwość</Title>
+            </Question>
+            <Question Key="IncomeValue" Type="Number" Step="1">
+                <Title>Wartość</Title>
+            </Question>
+            
+        </Form>
+
+        <Form Name="creator" Title="Konfiguracja postaci" ConnectedView="users">
+            <Description>
+                Skonfiguruj postać
+            </Description>
+            <Data>data.users</Data>
+            <Question Key="identifier" Type="Text" Required="true">
+                <Title>Identifier</Title>
+            </Question>
+            <Question Key="firstname" Type="Text" Required="true">
+                <Title>Imię</Title>
+            </Question>
+            <Question Key="lastname" Type="Text" Required="true">
+                <Title>Nazwisko</Title>
+            </Question>
+            <Question Key="inventory" Type="MultiObject" Source="[]">
+                <Title>Ekwipunek</Title>
+            </Question>
+            <Actions>
+                <Button Type="Clear"/>
+                <Button Action="log">Sprawdź</Button>
+                <Button Type="Submit">Dodaj</Button>
+                <Button Type="Confirm">Potwierdź</Button>
+                <Button Type="Cancel">Anuluj</Button>
+            </Actions>
+        </Form>
+    </Forms>
+    </script>
+
+
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body onload="LoadQFormView();">
+    <div id="Profiles"></div>
+    <div id="ProfilesCreator"></div>
+    <div id="Items"></div>
+    <div id="ItemsCreator"></div>
+    <div id="creator"></div>
+    <div id="users"></div>
+</body>
+</html>
