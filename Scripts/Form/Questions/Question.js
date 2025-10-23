@@ -66,7 +66,7 @@ class Question
         let tr = Create("tr");
 
         let th = Create("th");
-        th.innerText = this.Title;
+        th.innerHTML = this.Title;
         tr.appendChild(th);
 
         let td = Create("td");

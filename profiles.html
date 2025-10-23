@@ -51,8 +51,11 @@
     <script type="text/javascript" src="./Scripts/Form/Form.js"></script>
     <script type="text/javascript" src="./Scripts/Form/FormManager.js"></script>
     
-    <script type="text/javascript" src="./Scripts/main.js"></script>
+    <script type="text/javascript" src="./Scripts/Classes/Memory.js"></script>
+
     <script type="text/javascript" src="./Scripts/functions.js"></script>
+    <script type="text/javascript" src="./Scripts/Functions/profiles.js"></script>
+    <script type="text/javascript" src="./Scripts/main.js"></script>
 
     <script id="views" type="application/xml">
 
@@ -60,7 +63,7 @@
 
         <View Name="Profiles" Title="Profile">
             <Data>Data.Profiles</Data>
-            <Column Type="Counter">
+            <Column Type="Counter" StartFrom="1">
                 <Title>Lp.</Title>
             </Column>
             <Column Type="Custom">
@@ -86,7 +89,7 @@
         <Form Name="ProfilesCreator" Title="Konfigurator profili" ConnectedView="Profiles">
             <Data>Data.Profiles</Data>
             <Actions>
-                <Button Type="Submit"/>
+                <Button Type="Submit">Potwierdź</Button>
                 <Button Type="Confirm"/>
                 <Button Type="Cancel"/>
             </Actions>
@@ -94,7 +97,9 @@
                 <Title>Nazwa</Title>
             </Question>
             <Question Key="Color" Type="Color" Default="#ffffff">
-                <Title>Kolor</Title>
+                <Title>
+                    <img alt="."/>Kolor
+                </Title>
             </Question>
         </Form>
 
@@ -132,6 +137,24 @@
     </nav>
     <main>
         <div id="ProfilesCreator"></div>
+        <section>
+            <fieldset>
+                <legend>
+                    <h3>Panel pamięci</h3>
+                </legend>
+                <p>Uwaga! Jeśli nie zapiszesz - utracisz postęp (symulacja się nie powiedzie)</p>
+                <!-- <label>
+                    <button type="button" onclick="SaveProfiles();">Zapisz pamięć</button>
+                </label> -->
+                <label>
+                    <button type="button" onclick="ProfilesMemory.Update();">Zapisz pamięć</button>
+                </label>
+                <label>
+                    <!-- <button type="button" onclick="ResetProfiles();">Resetuj pamieć</button> -->
+                    <button type="button" onclick="ProfilesMemory.Reset();">Resetuj pamieć</button>
+                </label>
+            </fieldset>
+        </section>
         <div id="Profiles"></div>
     </main>
     <footer>
