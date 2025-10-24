@@ -56,13 +56,53 @@
     <script type="text/javascript" src="./Scripts/functions.js"></script>
     <script type="text/javascript" src="./Scripts/Functions/profiles.js"></script>
     <script type="text/javascript" src="./Scripts/Functions/items.js"></script>
+    <script type="text/javascript" src="./Scripts/Functions/events.js"></script>
     <script type="text/javascript" src="./Scripts/main.js"></script>
 
     <script id="views" type="application/xml">
 
     <Views>
-        <View>
-
+        <View Name="Events" Title="Wydarzenia">
+            <Data>Data.Events</Data>
+            <Column Type="Counter" StartFrom="1">
+                <Title>lp.</Title>
+            </Column>
+            <Column Type="Custom">
+                <Title>Nazwa</Title>
+                <Each Using="$=Name,@=Color">
+                    <div style="background-color:@;">
+                        $
+                    </div>
+                </Each>
+            </Column>
+            <Column Key="Item" Type="Custom">
+                <Title>Przedmiot</Title>
+                <Each Using="$=Item">
+                    <Table>
+                        <Data>[$]</Data>
+                        <Column Type="Counter" StartFrom="1">
+                            <Title>lp.</Title>
+                        </Column>
+                        <Column Type="Custom">
+                            <Title>Nazwa</Title>
+                            <Each Using="$=Name,@=Color">
+                                <div style="background-color:@;">
+                                    $
+                                </div>
+                            </Each>
+                        </Column>
+                    </Table>
+                </Each>
+            </Column>
+            <Column Key="Act">
+                <Title>Wydarzenie</Title>
+            </Column>
+            <Column Type="Action">
+                <Title>Akcje</Title>
+                <Button Action="EditEvent">Edytuj</Button>
+                <Button Action="RemoveEvent">Usuń</Button>
+            </Column>
+            
         </View>
     </Views>
 
@@ -71,8 +111,32 @@
     <script id="forms" type="application/xml">
     <Forms>
 
-        <Form>
-
+        <Form Name="EventsCreator" Title="Konfigurator wydarzeń" ConnectedView="Events">
+            <Description>
+                Wydarzenia to istotny element symulacji. Odpowiadają one za zmianę relacji między profilami a przedmiotami.
+            </Description>
+            <Data>Data.Events</Data>
+            <Actions>
+                <Button Type="Submit"/>
+                <Button Type="Cancel"/>
+                <Button Type="Confirm"/>
+            </Actions>
+            <Question Key="Name" Required="true">
+                <Title>Nazwa</Title>
+            </Question>
+            <Question Key="Color" Type="Color" Default="#ffffff">
+                <Title>Kolor</Title>
+            </Question>
+            <Question Key="Item" Type="Object" Source="Data.Items" KeyLabel="Name">
+                <Title>Przedmiot</Title>
+            </Question>
+            <Question Key="Act" Type="Radio">
+                <Title>Wydarzenie</Title>
+                <Answers Default="Buy">
+                    <Answer Value="Buy">Kupienie</Answer>
+                    <Answer Value="Sell">Sprzedanie</Answer>
+                </Answers>
+            </Question>
         </Form>
 
     </Forms>
@@ -108,7 +172,17 @@
         </ul>
     </nav>
     <main>
-        
+        <div id="EventsCreator"></div>
+        <section>
+            <fieldset>
+                <legend>
+                    <h3>Panel pamięci</h3>
+                </legend>
+                <button type="button" onclick="">Zapisz pamięć</button>
+                <button type="button" onclick="">Resetuj pamięć</button>
+            </fieldset>
+        </section>
+        <div id="Events"></div>
     </main>
     <footer>
         <p>

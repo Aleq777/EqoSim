@@ -9,7 +9,8 @@ class QuestionObject extends QuestionSelect
     {
         super (xml);
 
-        this.KeyLabel = this.XML.Attr("KeyLabel");
+        this.Source = xml.Attr("Source")
+        this.KeyLabel = xml.Attr("KeyLabel");
     }
 
     CreateHTML(obj)
@@ -50,6 +51,6 @@ class QuestionObject extends QuestionSelect
 
     GetValue()
     {
-        return this.Answers[this.HTML.value];
+        return eval(this.Source)[this.HTML.value];
     }
 }
