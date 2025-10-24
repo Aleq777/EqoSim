@@ -57,11 +57,32 @@
     <script type="text/javascript" src="./Scripts/Functions/profiles.js"></script>
     <script type="text/javascript" src="./Scripts/Functions/items.js"></script>
     <script type="text/javascript" src="./Scripts/Functions/events.js"></script>
+    <script type="text/javascript" src="./Scripts/Functions/simulation.js"></script>
     <script type="text/javascript" src="./Scripts/main.js"></script>
 
     <script id="views" type="application/xml">
-
+    
     <Views>
+
+        <View Name="Simulation" Title="Przebieg symulacji">
+            <Data>[]</Data>
+            <Column>
+                <Title>Dzień</Title>
+            </Column>
+            <Column>
+                <Title>Balans przed</Title>
+            </Column>
+            <Column>
+                <Title>Zmiana</Title>
+            </Column>
+            <Column>
+                <Title>Balans po</Title>
+            </Column>
+            <Column>
+                <Title>ZROBIĆ GENEROWANIE TEGO BOSZZZZ</Title>
+            </Column>
+
+        </View>
 
     </Views>
 
@@ -69,6 +90,36 @@
 
     <script id="forms" type="application/xml">
     <Forms>
+
+        <Form Name="SimulationCreator" Title="Konfigurator symulacji">
+            <Description>
+                Na ten czas prymitywne warunki ukończenia symulacji.
+                <b>Balans minimalny</b> - jeśli balans któregokolwiek z profili spadnie poniżej tej wartości, symulacja zostaje przerwana.
+                <b>Balans maksymalny</b> - analogicznie.
+                <b>Dzień kończący symulację</b> - absolutny koniec symulacji.
+                Te zabezpieczenia pozwalają na ominięcie sytuacji "niekończącej się symulacji". Jak lubisz ryzykować to po prostu ustaw wszystko na skrajne wartości i zobacz, ile przetrwa twoja przeglądarka
+            </Description>
+            <Data>[]</Data>
+            <Actions>
+                <Button Action="StartSimulation">Rozpocznij</Button>
+            </Actions>
+            <Question Key="Terminate" Type="Select">
+                <Title>Warunek skończenia symulacji</Title>
+                <Answers Default="DayOrBal">
+                    <Answer Value="DayOrBal">Dzień lub balans...</Answer>
+                </Answers>
+            </Question>
+            <Question Key="BalanceMin" Type="Number" Step="1" Default="-1000" Required="true">
+                <Title>Balans (minimalny)</Title>
+            </Question>
+            <Question Key="BalanceMax" Type="Number" Step="1" Default="1000000" Required="true">
+                <Title>Balans (maksymalny)</Title>
+            </Question>
+            <Question Key="FinishDay" Type="Number" Step="1" Min="1" Default="100" Required="true">
+                <Title>Dzień kończący symulację</Title>
+            </Question>
+
+        </Form>
 
     </Forms>
     </script>
@@ -103,7 +154,8 @@
         </ul>
     </nav>
     <main>
-        
+        <div id="SimulationCreator"></div>
+        <div id="Simulation"></div>
     </main>
     <footer>
         <p>
