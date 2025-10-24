@@ -1,17 +1,14 @@
-var formManager = null;
-var viewManager = null;
+
+
+var formManager = new FormManager();
+var viewManager = new ViewManager();
+
 
 function LoadQFormView()
 {
-    // ViewManager.Start();
-    viewManager = new ViewManager();
-    formManager = new FormManager();
-
     ProfilesMemory.Initialise();
-    // Data.Profiles = ProfilesMemory.Get;
-    // LoadProfiles();
+    ItemsMemory.Initialise();
     
     formManager.Start();
     viewManager.Start();
-    // FormManager.Start();
 }

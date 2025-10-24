@@ -51,14 +51,46 @@
     <script type="text/javascript" src="./Scripts/Form/Form.js"></script>
     <script type="text/javascript" src="./Scripts/Form/FormManager.js"></script>
     
-    <script type="text/javascript" src="./Scripts/main.js"></script>
+    <script type="text/javascript" src="./Scripts/Classes/Memory.js"></script>
+
     <script type="text/javascript" src="./Scripts/functions.js"></script>
+    <script type="text/javascript" src="./Scripts/Functions/profiles.js"></script>
+    <script type="text/javascript" src="./Scripts/Functions/items.js"></script>
+    <script type="text/javascript" src="./Scripts/main.js"></script>
 
     <script id="views" type="application/xml">
 
     <Views>
-        <View>
-
+        <View Name="Items" Title="Przedmioty">
+            <Data>Data.Items</Data>
+            <Column Type="Counter" StartFrom="1">
+                <Title>lp.</Title>
+            </Column>
+            <Column Type="Custom">
+                <Title>Nazwa</Title>
+                <Each Using="$=Name,@=Color">
+                    <div style="background-color:@;">
+                        $
+                    </div>
+                </Each>
+            </Column>
+            <Column Key="Cost">
+                <Title>Cena</Title>
+            </Column>
+            <Column Key="SellCost">
+                <Title>Wartość sprzedaży</Title>
+            </Column>
+            <Column Key="IncomeAmount">
+                <Title>Wartość dochodu</Title>
+            </Column>
+            <Column Key="IncomeFrequency">
+                <Title>Częstotliwość dochodu</Title>
+            </Column>
+            <Column Type="Action">
+                <Title>Akcje</Title>
+                <Button Action="EditItem">Edytuj</Button>
+                <Button Action="RemoveItem">Usuń</Button>
+            </Column>
         </View>
     </Views>
 
@@ -67,8 +99,31 @@
     <script id="forms" type="application/xml">
     <Forms>
 
-        <Form>
-
+        <Form Name="ItemsCreator" Title="Konfigurator przedmiotów" ConnectedView="Items">
+            <Data>Data.Items</Data>
+            <Actions>
+                <Button Type="Submit"/>
+                <Button Type="Cancel"/>
+                <Button Type="Confirm"/>
+            </Actions>
+            <Question Key="Name" Required="true">
+                <Title>Nazwa</Title>
+            </Question>
+            <Question Key="Color" Type="Color" Default="#ffffff">
+                <Title>Kolor</Title>
+            </Question>
+            <Question Key="Cost" Type="Number" Step="1" Required="true" Default="0">
+                <Title>Cena</Title>
+            </Question>
+            <Question Key="SellCost" Type="Number" Step="1" Default="0">
+                <Title>Cena sprzedaży</Title>
+            </Question>
+            <Question Key="IncomeAmount" Type="Number" Step="1">
+                <Title>Wartość dochodu</Title>
+            </Question>
+            <Question Key="IncomeFrequency" Type="Number" Step="1" Min="1" Required="false">
+                <Title>Częstotliwość dochodu</Title>
+            </Question>
         </Form>
 
     </Forms>
@@ -104,7 +159,25 @@
         </ul>
     </nav>
     <main>
-        
+        <div id="ItemsCreator">
+            <p>
+                Uwaga! Jeśli przedmiot ma przynosić dochód dodatni lub ujemny - musisz wpisać
+                <b>Wartość dochodu</b>
+                oraz
+                <b>Częstotliwość dochodu</b>
+                (1 = codziennie)
+            </p>
+        </div>
+        <section>
+            <fieldset>
+                <legend>
+                    <h3>Panel pamięci</h3>
+                </legend>
+                <button type="button" onclick="ItemsMemory.Update();">Zapisz pamięć</button>
+                <button type="button" onclick="ItemsMemory.Reset();">Wyczyść pamięć</button>
+            </fieldset>
+        </section>
+        <div id="Items"></div>
     </main>
     <footer>
         <p>
