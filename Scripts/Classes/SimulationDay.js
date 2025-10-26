@@ -10,13 +10,9 @@ class SimulationDay
 
         Data.Profiles.forEach(profile => {
 
-            if (profile.Current == null)
-            {
-                profile.Current = 0;
-            }
 
             this[profile.Name] = {
-                Before: profile.Current,
+                Before: profile.Balance,
                 Change: 0,
                 After: 0
             };

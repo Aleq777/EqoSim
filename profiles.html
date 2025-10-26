@@ -75,6 +75,9 @@
                     <div style="background-color:@;">$</div>
                 </Each>
             </Column>
+            <Column Key="Balance">
+                <Title>Balans</Title>
+            </Column>
             <Column Type="Action">
                 <Title>Akcje</Title>
                 <Button Action="EditProfile">Edytuj</Button>
@@ -100,9 +103,10 @@
                 <Title>Nazwa</Title>
             </Question>
             <Question Key="Color" Type="Color" Default="#ffffff">
-                <Title>
-                    <img alt="."/>Kolor
-                </Title>
+                <Title>Kolor</Title>
+            </Question>
+            <Question Key="Balance" Type="Number" Default="0" Required="true">
+                <Title>Startowy balans</Title>
             </Question>
         </Form>
 
