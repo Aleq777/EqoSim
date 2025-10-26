@@ -13,6 +13,15 @@ function InitialiseSimulationView()
     let content = `
     <Views>
         <View Name="Simulation" Title="Przebieg symulacji">
+            <Description>
+                Jeśli nie wyświetla się żaden profil, przejdź do
+                <a href="./profiles.html">Profile</a>
+                i utwórz tam profil.
+                <br/>
+                <b>
+                    Rozpoznasz brak profili po wyświetlaniu się jedynie kolumny <u>Dzień</u>
+                </b>
+            </Description>
             <Data>Data.Days</Data>
             <Column Key="Day">
                 <Title>Dzień</Title>
@@ -43,8 +52,6 @@ function _CreateProfileColumn(doc, profile)
     let columnEach = doc.createElement("Each");
     columnEach.SetAttr("Using", `$=${profile.Name}`);
     column.appendChild(columnEach);
-
-    // log(column);
 
     //#region innerColumn
     let table = doc.createElement("Table");
@@ -77,11 +84,42 @@ function _CreateProfileColumn(doc, profile)
     //#endregion
 
     d.appendChild(column);
-    // log(d.innerHTML);
     return d.innerHTML;
 }
 
 function StartSimulation(index, item)
 {
+    // log(item);
 
+    const terminateOn = item.Questions[0].GetValue();
+
+    const minBal = item.Questions[1].GetValue();
+
+    const maxBal = item.Questions[2].GetValue();
+
+    const lastDay = item.Questions[3].GetValue();
+
+    const view = viewManager.GetByName(item.ConnectedView);
+
+
+    // let day = {
+    //     Day: 0,
+    // };
+
+    // Data.Profiles.forEach(profile => {
+    //     day[profile.Name] = {
+    //         Before: 0,
+    //         Change: 0,
+    //         After: 0
+    //     };
+    // });
+
+    for (let i = 0; true; i++)
+    {
+        let day = new SimulationDay(i);
+
+        // remove breaker !!!
+        if (i == 0)
+            break;
+    }
 }
