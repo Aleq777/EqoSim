@@ -89,8 +89,6 @@ function _CreateProfileColumn(doc, profile)
 
 function StartSimulation(index, item)
 {
-    // log(item);
-
     const terminateOn = item.Questions[0].GetValue();
 
     const minBal = item.Questions[1].GetValue();
@@ -102,24 +100,12 @@ function StartSimulation(index, item)
     const view = viewManager.GetByName(item.ConnectedView);
 
 
-    // let day = {
-    //     Day: 0,
-    // };
-
-    // Data.Profiles.forEach(profile => {
-    //     day[profile.Name] = {
-    //         Before: 0,
-    //         Change: 0,
-    //         After: 0
-    //     };
-    // });
-
-    for (let i = 0; true; i++)
+    for (let i = 0; i + 1 <= lastDay; i++)
     {
         let day = new SimulationDay(i);
 
-        // remove breaker !!!
-        if (i == 0)
-            break;
+        Data.Days.push(day);
+        view.Reload();
     }
+
 }
