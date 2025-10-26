@@ -97,6 +97,26 @@
             <Column Key="Act">
                 <Title>Wydarzenie</Title>
             </Column>
+            <Column Key="Day">
+                <Title>Dzień</Title>
+            </Column>
+            <Column Type="Custom">
+                <Title>Profil</Title>
+                <Each Using="$=Profile">
+                    <Table>
+                        <Data>[$]</Data>
+                        <Column Type="Custom">
+                            <Title></Title>
+                            <Each Using="$=Name,@=Color">
+                                <div style="background-color:@;">
+                                    $
+                                </div>
+                            </Each>
+                        </Column>
+                    </Table>
+                </Each>
+            </Column>
+
             <Column Type="Action">
                 <Title>Akcje</Title>
                 <Button Action="EditEvent">Edytuj</Button>
@@ -136,6 +156,12 @@
                     <Answer Value="Buy">Kupienie</Answer>
                     <Answer Value="Sell">Sprzedanie</Answer>
                 </Answers>
+            </Question>
+            <Question Key="Day" Type="Number" Min="1" Step="1" Required="true">
+                <Title>Dzień</Title>
+            </Question>
+            <Question Key="Profile" Type="Object" Source="Data.Profiles" KeyLabel="Name">
+                <Title>Profil</Title>
             </Question>
         </Form>
 
