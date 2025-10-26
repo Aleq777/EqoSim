@@ -9,7 +9,10 @@ function LoadQFormView()
     ProfilesMemory  .Initialise();
     ItemsMemory     .Initialise();
     EventsMemory    .Initialise();
-    
+}
+
+function StartQFormView()
+{
     formManager.Start();
     viewManager.Start();
 }

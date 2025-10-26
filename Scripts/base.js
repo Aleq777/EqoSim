@@ -64,6 +64,16 @@ Element.prototype.Attr = function (name)
     return this.getAttribute(name);
 }
 
+Element.prototype.SetAttr = function (name, value)
+{
+    this.setAttribute(name, value);
+}
+Document.prototype.SetAttr = function (name, value)
+{
+    this.setAttribute(name, value);
+}
+//#endregion
+
 Element.prototype.Has = function (tag)
 {
     let found = false;
@@ -74,7 +84,6 @@ Element.prototype.Has = function (tag)
 
     return found;
 }
-//#endregion
 
 
 HTMLCollection.prototype.forEach = function (func)

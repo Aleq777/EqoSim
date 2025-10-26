@@ -29,7 +29,6 @@ class Memory
     {
         let value = this.Value;
 
-        log(value)
         this.DataSource[this.Accessor] = value;
     }
 
