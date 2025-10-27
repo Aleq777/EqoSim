@@ -1,11 +1,14 @@
 
 
+// Data used for generating simulation
 const Data = {
     Profiles: [],
 
     Items: [],
 
     Events: [],
+
+    Simulation: {},
 
     Days: [
         // {

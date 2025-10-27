@@ -1,60 +1,103 @@
 
+// class SimulationChangeUnit
+// {
+//     Before;
+//     Change;
+//     After;
+    
+//     constructor (before = 0, change = 0)
+//     {
+//         this.Before = before;
+//         this.Change = change;
+//         this.After = before + change;
+//     }
+// }
 
-class SimulationDay
-{
-    Day;
+// class SimulationDay
+// {
+//     constructor ()
+//     {
+//         Data.Profiles.forEach(profile => {
+//             this[profile.Name] = new SimulationChangeUnit(profile.Balance);
+//         });
+//     }
 
-    constructor (day)
-    {
-        this.Day = day;
+//     CollectAndPayIncomes()
+//     {
+        
+//     }
+// }
 
-        Data.Profiles.forEach(profile => {
+// class Simulation
+// {
+//     InventoryOf;
+
+//     constructor ()
+//     {
+//         Data.Profiles.forEach(profile => {
+//             this.InventoryOf[profile.Name] = [];
+//         });
+//     }
+// }
 
 
-            this[profile.Name] = {
-                Before: profile.Balance,
-                Change: 0,
-                After: profile.Balance
-            };
 
-        });
 
-        this._UpdateDay();
-    }
+// class SimulationDay
+// {
+//     Day;
 
-    _UpdateDay()
-    {
-        let change = { };
-        Data.Profiles.forEach(profile => change[profile.Name] = 0);
+//     constructor (day)
+//     {
+//         this.Day = day;
 
-        Data.Events.forEach(event => {
+//         Data.Profiles.forEach(profile => {
 
-            if (this.Day + 1 == event.Day)
-            {
-                // log("KAKA");
 
-                const cost = event.Act === "Buy" ? -event.Item.Price : event.Item.SellValue;
-                // log(cost);
+//             this[profile.Name] = {
+//                 Before: profile.Balance,
+//                 Change: 0,
+//                 After: profile.Balance
+//             };
 
-                // searching for the correct profile
-                Data.Profiles.forEach(profile => {
-                    if (profile.Name === event.Profile.Name)
-                    {
-                        profile.Balance += cost;
-                    }
-                })
+//         });
 
-                // event.Profile.Balance += cost;
-                Data.Profiles.forEach(profile => log(profile == event.Profile));
-                // log(event.Profile);
-                change[event.Profile.Name] += cost;
+//         this._UpdateDay();
+//     }
 
-                // update current
-                this[event.Profile.Name].Change += cost;
-                // log(this[event.Profile.Name].Before);
-                log(cost);
-                this[event.Profile.Name].After += this[event.Profile.Name].Before + cost;
-            }
-        });
-    }
-}
+//     _UpdateDay()
+//     {
+//         let change = { };
+//         Data.Profiles.forEach(profile => change[profile.Name] = 0);
+
+//         Data.Events.forEach(event => {
+
+//             if (this.Day + 1 == event.Day)
+//             {
+//                 // log("KAKA");
+
+//                 const cost = event.Act === "Buy" ? -event.Item.Price : event.Item.SellValue;
+//                 // log(cost);
+
+//                 // searching for the correct profile
+//                 Data.Profiles.forEach(profile => {
+//                     if (profile.Name === event.Profile.Name)
+//                     {
+//                         profile.Balance += cost;
+//                     }
+//                 })
+
+//                 // event.Profile.Balance += cost;
+//                 Data.Profiles.forEach(profile => log(profile == event.Profile));
+//                 // log(event.Profile);
+//                 change[event.Profile.Name] += cost;
+
+//                 // update current
+//                 this[event.Profile.Name].Change += cost;
+//                 // log(this[event.Profile.Name].Before);
+//                 log(cost);
+//                 this[event.Profile.Name].After += this[event.Profile.Name].Before + cost;
+//             }
+//         });
+//     }
+// }

@@ -2,13 +2,9 @@
 
 function InitialiseSimulationView()
 {
-    const simulationViewXML = document.getElementById("views");
-
     const parser = new DOMParser();
-
-    const views = parser.parseFromString(simulationViewXML.innerHTML, "application/xml");
-
-    let view = views.FindTag("View");
+    const simulationViewsHTML = document.getElementById("views");
+    const simulationViewsXML = parser.parseFromString(simulationViewsHTML.innerHTML, "application/xml");
 
     let content = `
     <Views>
@@ -29,11 +25,15 @@ function InitialiseSimulationView()
     `;
 
     Data.Profiles.forEach(profile => {
-        content += _CreateProfileColumn(views, profile);
+        content += _CreateProfileColumn(simulationViewsXML, profile);
     });
 
-    content += `</View> </Views>`;
-    simulationViewXML.innerHTML = content;
+    content += `
+        </View>
+    </Views>
+    `;
+
+    simulationViewsHTML.innerHTML = content;
 }
 
 function _CreateProfileColumn(doc, profile)
@@ -87,25 +87,33 @@ function _CreateProfileColumn(doc, profile)
     return d.innerHTML;
 }
 
-function StartSimulation(index, item)
-{
-    const terminateOn = item.Questions[0].GetValue();
+// function StartSimulation(index, item)
+// {
+//     const view = viewManager.GetByName(item.ConnectedView);
 
-    const minBal = item.Questions[1].GetValue();
+//     const terminateOn = item.Questions[0].GetValue(),
+//           minBal = item.Questions[1].GetValue(),
+//           maxBal = item.Questions[2].GetValue(),
+//           lastDay = item.Questions[3].GetValue();
 
-    const maxBal = item.Questions[2].GetValue();
-
-    const lastDay = item.Questions[3].GetValue();
-
-    const view = viewManager.GetByName(item.ConnectedView);
+//     Data.Days = [];
 
 
-    for (let i = 0; i + 1 <= lastDay; i++)
-    {
-        let day = new SimulationDay(i);
 
-        Data.Days.push(day);
-        view.Reload();
-    }
+//     for (let i = 0; i + 1 <= lastDay; i++)
+//     {
+//         let day = new SimulationDay();
 
-}
+
+
+//         let day = new SimulationDay(i);
+
+//         Data.Days.push(day);
+
+
+
+
+//         view.Reload();
+//     }
+
+// }
