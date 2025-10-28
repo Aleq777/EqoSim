@@ -12,6 +12,8 @@
     <script type="text/javascript" src="./Scripts/Classes/Manager.js"></script>
     <script type="text/javascript" src="./Scripts/Classes/Action.js"></script>
 
+    
+
     <!-- VIEWS -->
 
     <script type="text/javascript" src="./Scripts/View/Columns/Column.js"></script>
@@ -53,6 +55,14 @@
     
     <script type="text/javascript" src="./Scripts/Classes/Memory.js"></script>
 
+    
+    <script type="text/javascript" src="./Scripts/Simulation/SimulationDay.js"></script>
+    <script type="text/javascript" src="./Scripts/Simulation/SimulationItem.js"></script>
+    <script type="text/javascript" src="./Scripts/Simulation/SimulationEvent.js"></script>
+    <script type="text/javascript" src="./Scripts/Simulation/SimulationItemSlot.js"></script>
+    <script type="text/javascript" src="./Scripts/Simulation/SimulationProfile.js"></script>
+    <script type="text/javascript" src="./Scripts/Simulation/Simulation.js"></script>
+
     <script type="text/javascript" src="./Scripts/Classes/SimulationDay.js"></script>
 
     <script type="text/javascript" src="./Scripts/functions.js"></script>
@@ -60,6 +70,8 @@
     <script type="text/javascript" src="./Scripts/Functions/items.js"></script>
     <script type="text/javascript" src="./Scripts/Functions/events.js"></script>
     <script type="text/javascript" src="./Scripts/main.js"></script>
+
+    
     
     <script id="views" type="application/xml">
         
@@ -87,7 +99,7 @@
                 </Description>
                 <Data>[]</Data>
                 <Actions>
-                    <Button Action="StartSimulation">Rozpocznij</Button>
+                    <Button Action="() => EqoSim.Start()">Rozpocznij</Button>
                 </Actions>
                 <Question Key="Terminate" Type="Select">
                     <Title>Warunek skończenia symulacji</Title>
@@ -119,7 +131,7 @@
         }
     </style>
 </head>
-<body onload="LoadQFormView(); InitialiseSimulationView(); StartQFormView();">
+<body onload="LoadQFormView(); InitialiseSimulationView(); EqoSim.Initialise(); StartQFormView();">
     <header>
         <h1>EqoSim</h1>
         <h3>Symulator Ekonomii dla BountRP</h3>
