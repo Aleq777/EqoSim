@@ -47,10 +47,29 @@ class Simulation
 
         for (this.Day = 0; this.Day <= terminateDay; this.Day++)
         {
+            // Simulate the day
             this._SimulateDay();
+
+            // Check other termination limits
+            let mustStop = this._CheckTerminationLimits(minBal, maxBal);
+            
+            if (mustStop)
+                break;
         }
 
         log(this.Profiles);
+    }
+
+    _CheckTerminationLimits(minBal, maxBal)
+    {
+        let mustStop = false;
+
+        this.Profiles.forEach(profile => {
+            if (profile.Balance < minBal || profile.Balance > maxBal)
+                mustStop = true;
+        });
+
+        return mustStop;
     }
 
     _SimulateDay()
