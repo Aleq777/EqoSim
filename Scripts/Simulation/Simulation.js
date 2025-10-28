@@ -18,6 +18,15 @@ class Simulation
         });
     }
 
+    ResetAll()
+    {
+        this.Profiles = [];
+
+        Data.Days = [];
+
+        this.Initialise();
+    }
+
     _CreateProfile(profile)
     {
         this.Profiles.push(
@@ -27,6 +36,8 @@ class Simulation
 
     Start()
     {
+        this.ResetAll();
+
         const form = formManager.GetByName("SimulationCreator");
 
         const terminateEvent = form.Questions[0].GetValue(),
