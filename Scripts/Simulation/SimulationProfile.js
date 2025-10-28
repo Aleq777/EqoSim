@@ -117,16 +117,18 @@ class SimulationProfile
 
     CollectAndPay(simulationDay)
     {
-        this.Inventory.forEach(item => {
-            if (item.Income && item.CanCollect(simulationDay))
-                this._CollectFrom(item);
+        this.Inventory.forEach(slot => {
+            log(slot)
 
-            item.NextDay();
+            if (slot.Item.Income && slot.CanCollect(simulationDay))
+                this._CollectFrom(slot);
+
+            slot.NextDay();
         });
     }
 
-    _CollectFrom(item)
+    _CollectFrom(slot)
     {
-        this.Balance += item.Income;
+        this.Balance += slot.Item.Income;
     }
 }
